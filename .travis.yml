@@ -37,4 +37,5 @@ deploy:
   cleanup: false
   # Modify this to build on every commit
   on:
-    tags: false
+    tags: true
+    branch: 2.1-maven
