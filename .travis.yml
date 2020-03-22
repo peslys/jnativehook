@@ -1,4 +1,5 @@
 # Travis build script for JNativeHook
+# Based on https://gist.github.com/Lazersmoke/cb8445b7bd7b113b0244fe0fae1ea7ab
 
 os:
   - linux
@@ -37,6 +38,6 @@ deploy:
   provider: releases
   token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
   file: target/release.jar
-  cleanup: false
+  skip_cleanup: true
   on:
     tags: true
