@@ -3,6 +3,9 @@
 # Use Maven
 language: java
 
+jdk:
+  - openjdk8
+
 # Using Docker to build native libraries
 services:
   - docker
