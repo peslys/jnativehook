@@ -1,8 +1,5 @@
 # Travis build script for JNativeHook
 
-# Use new container infrastructure to enable caching
-sudo: false
-
 # Use Maven
 language: java
 
@@ -14,6 +11,13 @@ services:
 cache:
   directories:
     - $HOME/.m2
+    - docker_images
+
+before_install:
+  - docker load -i docker_images/images.tar || true
+
+before_cache:
+  - docker save -o docker_images/images.tar $(docker images -a -q)
 
 # TODO Tip do not worked here
 ## Only re-download spigot if we don't have spigot in the repo
