@@ -76,8 +76,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-<!-- FIXME Temporary added lib folder to Git. This way do not works well yet.
 			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
@@ -89,25 +87,21 @@
 							<alias>jnativehook-builder</alias>
 							<run>
 								<workingDir>/tmp/build</workingDir>
-								<cmd>
-									<shell>ant -f cross.build.xml_</shell>
-									<shell>echo 'Cross Build Ended'</shell>
-								</cmd>
+								<cmd>ant -f cross.build.xml</cmd>
+								<log>
+									<enabled>true</enabled>
+								</log>
 								<volumes>
 									<bind>
 										<volume>${project.basedir}:/tmp/build</volume>
 									</bind>
 								</volumes>
-
-<!- -
 								<wait>
-									<log>Cross Build Ended</log>
-									<time>500</time>
-									<exit>0</exit>
+									<log>Total time:</log>
+									<time>3600000</time>
+									<kill>2000</kill>
+									<shutdown>1000</shutdown>
 								</wait>
-- ->
-
-								<stopMode>kill</stopMode>
 							</run>
 						</image>
 					</images>
@@ -117,20 +111,18 @@
 						<id>docker-start</id>
 						<phase>generate-resources</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>start</goal>
 						</goals>
 					</execution>
 					<execution>
 						<id>docker-stop</id>
-						<phase>install</phase>
+						<phase>post-integration-test</phase>
 						<goals>
 							<goal>stop</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
--->
-
 		</plugins>
 
 	</build>
