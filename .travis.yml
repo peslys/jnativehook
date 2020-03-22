@@ -31,10 +31,8 @@ install:
 # Note that the api_key is safe to put here because it is actually encrypted
 deploy:
   provider: releases
-  token:
-    secure: JhefugtWM+uNdUgKBzme3VIcA1ydEVxTtFrEfko5NzU05PwM/QgXyYcI2Ri2HCAzz5WztefqN2k6I4vxrQisPCyQnhsam3UDlP5mFL5i00Mas251kncwUL68UaSY6RIs0MsS/a3eFmBZd7FZoTZ7CkMtSD7Wb8PCvq7V9Uf4TwH5wE9ehgyCvYSZRk7ciAhb5dA4r3Lc1x08VLqUuCSRIcmK7hHJUmR4aLcdCyFILiRsRLxZZclDS3ps4sp4OpASNjojp1j0+VMX3dSAeSuKcxTnBGDeI3Q36b7mSHMJaGyYotGLOoOJer7EtEoM6xAP0RDDX4wdK2ycNGHG5F+YYWhUh98fc/S4dqC6bEixhn+ikE/O3nmMJ/VzmHMAvAz0o4P1nsNjj+457Nke0waxQmsXZuGMoZmjm8uep+kwERhBb0fdMTAmrRanW+NGWIxj13eEEPK4ju63+OPE+/0DGi5S7EqOGu5xSrMqBJjwihGsgl4nQEA262p/pUC+Ee845RqKgVpOaqQa3+Jgul4A8qWU1K+/udwebLvQ4kL66pe+UbH9x2gkmxEXskxKbwohSrsu7xvtR2K09Atc3yT9eKHwVJa6YC25Nbpr82hAK7h9AuN6NclhLCi4C8YUoN5CBRI1Si2kfDNKpTr9AuTfldQfrxPtU/PLhQAEBdWJhKk=
-  file: target/release.jar
-  cleanup: false
-  # Modify this to build on every commit
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
   on:
     branch: 2.1-maven
