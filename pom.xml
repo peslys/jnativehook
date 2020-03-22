@@ -23,6 +23,79 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>env.BUILD_ENVIRONMENT</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>io.fabric8</groupId>
+						<artifactId>docker-maven-plugin</artifactId>
+						<version>0.33.0</version>
+						<configuration>
+							<images>
+								<image>
+									<name>peslys/jnativehook-builder:latest</name>
+									<alias>jnativehook-builder</alias>
+									<run>
+										<workingDir>/tmp/build</workingDir>
+										<cmd>ant -f cross.build.xml</cmd>
+										<log>
+											<enabled>true</enabled>
+										</log>
+										<volumes>
+											<bind>
+												<volume>${project.basedir}:/tmp/build</volume>
+											</bind>
+										</volumes>
+										<wait>
+											<log>Total time:</log>
+											<time>3600000</time>
+											<kill>2000</kill>
+											<shutdown>1000</shutdown>
+										</wait>
+									</run>
+								</image>
+							</images>
+						</configuration>
+						<executions>
+							<execution>
+								<id>docker-start</id>
+								<phase>generate-resources</phase>
+								<goals>
+									<goal>start</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>docker-stop</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>jitpack</id>
+			<activation>
+				<property>
+					<name>env.BUILD_ENVIRONMENT</name>
+					<value>jitpack</value>
+				</property>
+			</activation>
+		</profile>
+	</profiles>
+
 	<build>
 
 		<sourceDirectory>src/java</sourceDirectory>
@@ -73,53 +146,6 @@
 								</resource>
 							</resources>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.33.0</version>
-				<configuration>
-					<images>
-						<image>
-							<name>peslys/jnativehook-builder:latest</name>
-							<alias>jnativehook-builder</alias>
-							<run>
-								<workingDir>/tmp/build</workingDir>
-								<cmd>ant -f cross.build.xml</cmd>
-								<log>
-									<enabled>true</enabled>
-								</log>
-								<volumes>
-									<bind>
-										<volume>${project.basedir}:/tmp/build</volume>
-									</bind>
-								</volumes>
-								<wait>
-									<log>Total time:</log>
-									<time>3600000</time>
-									<kill>2000</kill>
-									<shutdown>1000</shutdown>
-								</wait>
-							</run>
-						</image>
-					</images>
-				</configuration>
-				<executions>
-					<execution>
-						<id>docker-start</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>docker-stop</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>
