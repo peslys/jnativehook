@@ -325,9 +325,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			<developer name="Alexander Barker" email="alex@1stleg.com" organization="Personal" organizationurl="https://github.com/kwhat/" />
 
 			<scm
-				connection="https://github.com/kwhat/jnativehook.git"
-				developerconnection="https://github.com/kwhat/jnativehook.git"
-				url="https://github.com/kwhat/jnativehook.git" />
+				connection="scm:git:git@github.com:kwhat/jnativehook.git"
+				developerconnection="scm:git:git@github.com:kwhat/jnativehook.git"
+				url="git@github.com:kwhat/jnativehook.git" />
 		</pom>
 		<writepom pomRefId="maven.pom.id" file="pom.xml" trim="true" />
 
