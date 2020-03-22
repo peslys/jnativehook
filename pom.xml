@@ -12,6 +12,9 @@
 		<maven.compiler.source>1.6</maven.compiler.source>
 		<maven.compiler.target>1.6</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- Requred by Tracic CI build -->
+		<finalName>${project.artifactId}-${project.version}</finalName>
 	</properties>
 
 	<dependencies>
@@ -100,6 +103,9 @@
 
 		<sourceDirectory>src/java</sourceDirectory>
 		<testSourceDirectory>src/test</testSourceDirectory>
+
+		<!-- Override the final name for Travis CI if set -->
+		<finalName>${finalName}</finalName>
 
 		<resources>
 			<resource>
