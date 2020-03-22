@@ -29,6 +29,7 @@ import org.jnativehook.mouse.NativeMouseWheelEvent;
 import org.jnativehook.mouse.NativeMouseWheelListener;
 import org.jnativehook.mouse.listeners.NativeMouseInputListenerImpl;
 import org.jnativehook.mouse.listeners.NativeMouseWheelListenerImpl;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.swing.event.EventListenerList;
@@ -338,6 +339,7 @@ public class GlobalScreenTest {
 	/**
 	 * Test of dispatchEvent method, of class GlobalScreen.
 	 */
+	@Ignore("This test crashes Java VM on macOS")
 	@Test
 	public void testPostNativeEvent() throws InterruptedException, NativeHookException {
 		System.out.println("dispatchEvent");

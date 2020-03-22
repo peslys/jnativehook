@@ -168,6 +168,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 		<!-- Preform target checks. -->
+		<mkdir dir="${dir.src}/libuiohook" />
 		<fileset dir="${dir.src}/libuiohook" id="src-libuiohook" />
 		<pathconvert refid="src-libuiohook" property="project.check.libuiohook.download" setonempty="false" />
 		<available file="${dir.src}/libuiohook/configure" property="project.check.libuiohook.bootstrap" />
@@ -331,11 +332,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 		<echo>Downloading libUIOHook source...</echo>
 		<mkdir dir="${dir.src}/libuiohook" />
 
+<!--
 		<get src="https://github.com/kwhat/libuiohook/archive/1.1.zip" dest="${dir.bin}/libuiohook-1.1.zip" verbose="true" />
 
 		<unzip src="${dir.bin}/libuiohook-1.1.zip" dest="${dir.src}/libuiohook">
 			<mapper type="glob" from="libuiohook-1.1/*" to="*" />
 		</unzip>
+-->
+		<exec executable="git" dir="${dir.src}">
+			<arg line="clone -b 1.1 https://github.com/peslys/libuiohook.git"/>
+		</exec>
+
 	</target>
 
 
@@ -387,7 +394,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 			<compilerarg line="${ant.build.javac.args}"/>
 
 			<src path="${dir.src}/java" />
-			
+
 			<!-- FIXME Java 9 -->
 			<exclude name="module-info.java" />
 

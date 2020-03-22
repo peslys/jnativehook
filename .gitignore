@@ -3,7 +3,6 @@
 /dist/
 /doc/
 /jar/
-/lib/
 /src/jni/include/org_jnativehook_GlobalScreen.h
 /src/jni/include/org_jnativehook_GlobalScreen_EventDispatchTask.h
 /src/jni/include/org_jnativehook_GlobalScreen_NativeHookThread.h
@@ -12,3 +11,13 @@
 *build.properties
 *.project
 *.classpath
+
+/classes/
+/jnitasks/
+/ant-jnitasks-0.3.zip
+
+/.settings/
+/src/libuiohook/
+/src/libuiohook.bak/
+/classes/
+/target/
