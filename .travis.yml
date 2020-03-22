@@ -30,7 +30,7 @@ cache:
 
 # Set the final name using pom-fu
 install:
-  - mvn install -DfinalName=release -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - mvn clean install -DfinalName=release -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 # You fill out this section by encrypting the key using the travis utility
 # Note that the api_key is safe to put here because it is actually encrypted
