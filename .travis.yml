@@ -14,18 +14,14 @@ services:
 cache:
   directories:
     - $HOME/.m2
-    - docker_images
+#    - docker_images
 
-before_install:
-  - docker load -i docker_images/images.tar || true
-
-before_cache:
-  - docker save -o docker_images/images.tar $(docker images -a -q)
-
-# TODO Tip do not worked here
-## Only re-download spigot if we don't have spigot in the repo
+# TODO Tip do not worked as expected here
 #before_install:
-#  - if [ ! -d "$HOME/.m2/repository/org/spigotmc" ]; then ./installSpigot.sh 1.12 ; else echo "Not compiling Spigot because it is already in our maven" ; fi
+#  - docker load -i docker_images/images.tar || true
+
+#before_cache:
+#  - docker save -o docker_images/images.tar $(docker images -a -q)
 
 # Set the final name using pom-fu
 install:
@@ -38,7 +34,7 @@ deploy:
   api_key:
     secure: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAyPbzRCodbNtvL/OrL0Kp nJyxi39ULTyInqBz+wX8zhlrX7gp1i1kB/iWOE5jvVkFlHc2E5SRiuISO1XEY+ca ZPux+AER7vQdQysgQUCb6qgXeO8oooINXJiS2BWBG2dLqN1JnyOJk3I8m7pcdjtT KZdGCuzd8zLyXbK07tPLlJpSlW5Y5jScDkBVaG6gNN94xMkmN9/yfAGrHFH2w07Y SCKa/8g/nLQ3tBTFRt8MQGlj+CaNkYn7tbkEFnl5RPhoqlVonVjlZFEkCHkfD+c8 Fx8SBTswfwLyIvhafZob9HHvotol+v6J85bdPtgca/MF8LPTNFrgpkq8Y569Xy/H UI5NUFo99Eas9htbYPdLF8VxMHqD4N2+FRbGHjH7UcyNubmFlQTpZgzCo2sYvXUX tLRvGlk1CyX+rJTGKkYeWSNl8PBRv2cWGHcEhb0Mk359AAD9cZrGFwMolJeAZn1U OZxWsF0JyDO32N4CeSp3fopiA5ROngecnR+YFwnl6ILbLMSptH1AOLJ562ceWCas zAwNhl/DJ6XC+ad4oOWEyhDsVc6ERvMvM/wrSfVQ8UdpbfLZHKLIz8x4Qi/z5cE0 YoVklMeySpQV7Y+CaPs1wxU0g/sEqSEEwBp7/NusTYeL+NkQRPcqEtF1T9LXDjEk KlSFH4J/JUjvPoD9oHfLdu0CAwEAAQ==
   file: target/release.jar
-  skip_cleanup: true
+  cleanup: false
   # Modify this to build on every commit
   on:
     tags: true
