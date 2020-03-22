@@ -37,4 +37,4 @@ deploy:
   cleanup: false
   # Modify this to build on every commit
   on:
-    tags: true
+    tags: false
