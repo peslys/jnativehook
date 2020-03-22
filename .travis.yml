@@ -31,8 +31,9 @@ install:
 # Note that the api_key is safe to put here because it is actually encrypted
 deploy:
   provider: releases
+  token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  file: target/release.jar
   skip_cleanup: true
-  api_key: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep_history: true
+  # Modify this to build on every commit
   on:
     tags: true
