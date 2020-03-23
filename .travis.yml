@@ -30,6 +30,7 @@ before_cache:
 
 install: skip
 script:
+  - docker run -v $(pwd):/tmp/build -w /tmp/build peslys/jnativehook-builder:latest ant -buildfile cross.build.xml
   - mvn clean install -DfinalName=release -DskipTests=true -Dmaven.javadoc.skip=true
 
 # You fill out this section by encrypting the key using the travis utility

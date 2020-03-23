@@ -145,6 +145,7 @@
 						</goals>
 						<configuration>
 							<outputDirectory>${project.build.directory}/extra-resources/org/jnativehook/lib</outputDirectory>
+							<includeEmptyDirs>true</includeEmptyDirs>
 							<resources>
 								<resource>
 									<directory>lib</directory>
