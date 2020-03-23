@@ -5,7 +5,7 @@ before_install:
   - echo $ARTIFACT
   - echo $VERSION
   - echo "Downloading release jar for version $VERSION from `echo $GROUP | grep -oP '(?<=com\.github\.)\w+'`/jnativehook"
-  - wget https://github.com/`echo $GROUP | grep -oP '(?<=com\.github\.)\w+'`/jnativehook/releases/download/$VERSION/release.jar -O release.jar
+  - wget --tries=50 --waitretry=5 https://github.com/`echo $GROUP | grep -oP '(?<=com\.github\.)\w+'`/jnativehook/releases/download/$VERSION/release.jar -O release.jar
 
 install:
   - mvn install:install-file -Dfile=release.jar -DartifactId=$ARTIFACT -DgroupId=$GROUP -Dversion=$VERSION -Dpackaging=jar
