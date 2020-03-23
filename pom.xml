@@ -9,11 +9,11 @@
 
 	<properties>
 		<maven.min-version>3.0</maven.min-version>
-		<maven.compiler.source>1.6</maven.compiler.source>
-		<maven.compiler.target>1.6</maven.compiler.target>
+		<maven.compiler.source>1.5</maven.compiler.source>
+		<maven.compiler.target>1.5</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-		<!-- Requred by Tracic CI build -->
+		<!-- Required by Travis CI build -->
 		<finalName>${project.artifactId}-${project.version}</finalName>
 	</properties>
 
@@ -131,6 +131,32 @@
 				<configuration>
 					<testFailureIgnore>true</testFailureIgnore>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>3.0.0-M3</version>
+				<executions>
+					<execution>
+						<id>enforce-dont-exist</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireFilesExist>
+									<message>Before build run: &#xD;
+    docker run -v $(pwd):/tmp/build -w /tmp/build peslys/jnativehook-builder:latest ant -buildfile cross.build.xml</message>
+									<files>
+										<file>lib</file>
+									</files>
+								</requireFilesExist>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-resources-plugin</artifactId>
