@@ -19,14 +19,14 @@ services:
 cache:
   directories:
     - $HOME/.m2
-#    - docker_images
+    - $HOME/docker_images
 
 # TODO Tip do not worked as expected here
-#before_install:
-#  - docker load -i docker_images/images.tar || true
+before_install:
+  - docker load -i $HOME/docker_images/images.tar || true
 
-#before_cache:
-#  - docker save -o docker_images/images.tar $(docker images -a -q)
+before_cache:
+  - docker save -o $HOME/docker_images/images.tar $(docker images -a -q)
 
 install: skip
 script:
